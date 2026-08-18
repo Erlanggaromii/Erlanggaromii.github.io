@@ -173,21 +173,59 @@
       </div>
     </div>
 
-     <script
+    ```html
+<!-- Thinkstack AI Chatbot -->
+<script
   chatbot_id="6a83215294ca7e8e9d10d3fa"
   data-type="default"
-  src="https://app.thinkstack.ai/bot/thinkstackai-loader.min.js"
-></script>
+  src="https://app.thinkstack.ai/bot/thinkstackai-loader.min.js">
+</script>
 
 <style>
-  /* Timpa posisi default widget ThinkStack AI ke tengah vertikal */
+  /* Posisi tombol AI Chatbot di tengah kanan */
   iframe[src*="thinkstack"],
-  [id*="thinkstack"] {
+  iframe[src*="app.thinkstack"] {
+    position: fixed !important;
+    right: 15px !important;
     top: 50% !important;
     bottom: auto !important;
     transform: translateY(-50%) !important;
+    z-index: 999999 !important;
   }
 </style>
+
+<script>
+  // Pastikan posisi tetap diterapkan setelah Thinkstack selesai loading
+  const moveThinkstackChatbot = () => {
+    document.querySelectorAll('iframe').forEach((iframe) => {
+      const src = iframe.getAttribute('src') || '';
+
+      if (src.includes('thinkstack')) {
+        iframe.style.setProperty('position', 'fixed', 'important');
+        iframe.style.setProperty('right', '15px', 'important');
+        iframe.style.setProperty('top', '50%', 'important');
+        iframe.style.setProperty('bottom', 'auto', 'important');
+        iframe.style.setProperty('transform', 'translateY(-50%)', 'important');
+        iframe.style.setProperty('z-index', '999999', 'important');
+      }
+    });
+  };
+
+  // Jalankan beberapa kali karena widget dimuat secara asynchronous
+  setTimeout(moveThinkstackChatbot, 500);
+  setTimeout(moveThinkstackChatbot, 1500);
+  setTimeout(moveThinkstackChatbot, 3000);
+
+  // Pantau jika Thinkstack membuat element baru
+  const observer = new MutationObserver(moveThinkstackChatbot);
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+</script>
+```
+
 
 
   </footer>
