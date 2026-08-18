@@ -150,37 +150,6 @@
   src="https://app.thinkstack.ai/bot/thinkstackai-loader.min.js">
 </script>
 
-
-<script>
-  // Pastikan posisi tetap diterapkan setelah Thinkstack selesai loading
-  const moveThinkstackChatbot = () => {
-    document.querySelectorAll('iframe').forEach((iframe) => {
-      const src = iframe.getAttribute('src') || '';
-
-      if (src.includes('thinkstack')) {
-        iframe.style.setProperty('position', 'fixed', 'important');
-        iframe.style.setProperty('right', '15px', 'important');
-        iframe.style.setProperty('top', '50%', 'important');
-        iframe.style.setProperty('bottom', 'auto', 'important');
-        iframe.style.setProperty('transform', 'translateY(-50%)', 'important');
-        iframe.style.setProperty('z-index', '999999', 'important');
-      }
-    });
-  };
-
-  // Jalankan beberapa kali karena widget dimuat secara asynchronous
-  setTimeout(moveThinkstackChatbot, 500);
-  setTimeout(moveThinkstackChatbot, 1500);
-  setTimeout(moveThinkstackChatbot, 3000);
-
-  // Pantau jika Thinkstack membuat element baru
-  const observer = new MutationObserver(moveThinkstackChatbot);
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-</script>
 ```
 
 
